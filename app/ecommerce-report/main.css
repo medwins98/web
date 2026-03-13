@@ -1,0 +1,320 @@
+:root {
+	--main-color: var(--main-bg);
+	--scroll-color: var(--main-bg);
+}
+#root, #app {
+	display: flex;
+	flex-direction: column;
+}
+#main {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	padding: 16px;
+}
+
+.table-container {
+	width: 100%;
+	overflow-x: auto;
+}
+.table-container::-webkit-scrollbar {
+	width: 2px;
+}
+.table-container::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	background: var(--scroll-color);
+}
+.table-heavy {
+	content-visibility: auto;
+}
+
+.card {
+	padding: 12px;
+	border-radius: 8px;
+	border: 1px solid #eee;
+	background-color: #fff;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.grid-item-card .title {
+	font-size: 11px;
+	color: #6b7280;
+}
+.grid-item-card .result {
+	font-size: 18px;
+	font-weight: bold;
+}
+.grid-item-card .result.default { color: var(--main-color); }
+.grid-item-card .title-alt {
+	font-size: 10px;
+	color: #9ca3af;
+}
+
+/* Main Dashboard */
+.dashboard-container {
+	min-height: 100vh;
+	font-family: system-ui, sans-serif;
+}
+.dashboard-header {
+	margin-bottom: 24px;
+	border-bottom: 2px solid #e5e7eb;
+	padding-bottom: 1rem;
+}
+.dashboard-header .title {
+	margin: 0;
+	color: #111827;
+	font-size: 24px;
+}
+.report-section {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+	gap: 20px;
+	margin-bottom: 24px;
+}
+
+/* ---- Order Item List ---- */
+.order-items {
+	background: #fff;
+	border-radius: 8px;
+	border: 1px solid #e5e7eb;
+	overflow: hidden;
+	margin-bottom: 12px
+}
+
+.oi-header {
+	background: #f9fafb;
+	padding: 8px 16px;
+	border-bottom: 1px solid #e5e7eb;
+	display: flex;
+	justify-content: space-between;
+	font-size: 12px;
+	font-weight: 600;
+	color: #6b7280;
+}
+.oi-item-wrapper {
+	padding: 16px;
+	display: flex;
+	gap: 16px;
+}
+.oi-product-info { flex: 1 }
+.oi-product-info .product-title {
+	font-size: 14px;
+	font-weight: 600;
+	color: #111827;
+	margin-bottom: 4px;
+}
+.oi-product-info .product-sku-info {
+	display: flex;
+	gap: 12px;
+	flex-wrap: wrap;
+	margin-bottom: 8px;
+}
+.oi-product-info .product-sku-info .sku-code {
+	font-size: 11px;
+	background: #eff6ff;
+	color: var(--main-color);
+	padding: 2px 6px;
+	border-radius: 4px;
+	border: 1px solid #dbeafe;
+}
+.oi-product-info .product-sku-info .sku-name {
+	font-size: 11px;
+	background: #f3f4f6;
+	color: #4b5563;
+	padding: 2px 6px;
+	border-radius: 4px;
+}
+.oi-product-info .detail-info {
+	font-size: 12px;
+	color: #9ca3af;
+	display: flex;
+	align-items: center;
+	gap: 16px;
+}
+.oi-subtotal {
+	text-align: right;
+	min-width: 120px;
+}
+.oi-subtotal .item-subtotal {
+	font-size: 14px;
+	font-weight: bold;
+	color: #111827;
+}
+.oi-subtotal .item-total-price {
+	font-size: 12px;
+	color: #6b7280;
+	margin-top: 4px;
+}
+oi-subtotal .item-discount {
+	font-size: 11px;
+	color: #ef4444;
+	text-decoration: line-through;
+}
+oi-footer {
+	background: #fefce8;
+	padding: 10px 16px;
+	border-top: 1px solid #fef08a;
+	font-size: 12px;
+	color: #854d0e;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+
+/* ---- SKU Performance ---- */
+.sku-performance-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	margin-bottom: 12px;
+}
+.sku-performance-header .sku-code {
+	font-size: 12px;
+	color: var(--main-color);
+	font-weight: bold;
+}
+.sku-performance-header .sku-name {
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 1.4;
+}
+.sku-performance-header .sku-revenue {
+	font-size: 16px;
+	font-weight: bold;
+	color: var(--main-color);
+}
+.sku-performance-header .sku-total-qty {
+	font-size: 12px;
+	color: #666;
+}
+.sku-perfomance-content {
+	background: #f9fafb;
+	border-radius: 4px;
+	padding: 10px;
+	margin-top: 10px;
+}
+.sku-performance-content .info-wrapper {
+	display: flex;
+	justify-content: space-between;
+	font-size: 12px;
+	padding: 5px 0;
+	border-bottom: 1px dashed #ddd;
+}
+.sku-performance-content .sku-name {
+	color: #444;
+}
+.sku-performance-content .sku-qty {
+	margin-right: 10px;
+}
+.sku-performance-content .sku-contribution {
+	color: var(--main-color);
+	font-weight: bold;
+}
+.sku-performance-footer {
+	display: flex;
+	gap: 16px;
+	margin-top: 12px;
+	font-size: 11px;
+	color: #888;
+}
+
+/* ---- Basket ---- */
+.basket-container {
+	background: #fff;
+	padding: 16px;
+	border-radius: 8px;
+	font-family: sans-serif;
+}
+.basket-card {
+	border: 1px solid #e5e7eb;
+	border-radius: 10px;
+	padding: 16px;
+	margin-bottom: 16px;
+	background: #fafafa;
+}
+.basket-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 12px;
+	gap: 8px;
+}
+.basket-header .basket-sku {
+	font-weight: bold;
+	color: #1f2937;
+	font-size: 14px;
+	background: #fff;
+	padding: 4px 10px;
+	border-radius: 6px;
+	border: 1px solid #ddd;
+}
+.basket-header .basket-reliability {
+	font-size: 12px;
+	padding: 2px 8px;
+	border-radius: 12px;
+	background: #fef3c7;
+	color: #92400e;
+}
+.basket-content {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 8px;
+}
+.basket-content .basket-item-card {
+	background: #fff;
+	padding: 10px;
+	border-radius: 6px;
+	border: 1px solid #f0f0f0;
+}
+.basket-content .result.occurrence { color: var(--main-color); }
+.basket-content .result.lift { color: #ef4444; }
+.basket-footer {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 12px;
+	padding-top: 10px;
+	border-top: 1px dashed #eee;
+	font-size: 12px;
+}
+
+/* ---- Regional ---- */
+.report-item {
+	border-bottom: 1px solid #eee;
+	padding-bottom: 12px;
+}
+.report-main-info {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 6px;
+}
+.report-main-info .info-title {
+	font-weight: bold;
+	font-size: 14px
+}
+.report-main-info .info-description {
+	font-size: 12px;
+	color: #666;
+}
+.report-sub-info {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 8px;
+	font-size: 12px;
+	color: #444;
+}
+
+/* ---- Bar ---- */
+.bar-container {
+	width: 100%;
+	bg: #f0f0f0;
+	height: 6px;
+	border-radius: 3px;
+	background: #eee;
+	overflow: hidden;
+}
+.bar-fill {
+	height: 100%;
+	background: var(--main-color);
+}
