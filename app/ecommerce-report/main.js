@@ -4,11 +4,11 @@ import { FormField } from 'app/modules';
 import { MAP_KEY, mapData, joinData, generateReport, formatValue } from 'app/modules';
 import { TableWrapper, DetailWrapper, MainDashboard } from 'app/modules';
 import { DonateComponent } from 'app/modules';
-//import { createClient } from 'supabase';
+import { createClient } from 'supabase';
 
 const SUPABASE_URL = 'https://csnkzanmarcgwpujbyol.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_pQvQWZSOM_zPyBTM2oWajw_Le1kYlGZ';
-//const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const Fragment = (props) => props.children;
 const elapp = document.getElementById('app');
@@ -203,7 +203,7 @@ function FormUploadReport({ dataHandler = null })
 			base.adjustmentCount = base.joined.filter(d => d.hasAdjustment === 'Y')?.length || 0;
 			base.discrepancyCount = base.joined.filter(d => d.hasDiscrepancy === 'Y')?.length || 0;
 			base.slug = Object.values(base.slug[1])[1];
-			//loggingUsage(base.slug, base.orderRelationCount.length);
+			loggingUsage(base.slug, base.orderRelationCount);
 			dataHandler(base);
 		}
 		catch(err) {
