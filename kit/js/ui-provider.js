@@ -61,7 +61,7 @@ export function InteractiveContent({ title = 'Quick View', type = 'quickview', w
 			<div class="interactive-wrapper ${(type === 'quickview') ? 'quickview' : 'popup'}">
 				<div class="header">
 					<h3 class="m-0">${ title }</h3>
-					<button onClick=${closeContent} class="btn btn-toggle-interactive">\u00D7</button>
+					<button onClick=${closeContent} class="btn btn-toggle-interactive" aria-label="Close content">\u00D7</button>
 				</div>
 			
 				<div class="content">${ children }</div>
@@ -83,7 +83,7 @@ export function LoadingBar()
 	
 	return html`
 		<div class="loading-track">
-			<div class="loading-dash"></div>
+			<div class="loading-dash" aria-label="Loading bar moving" aria-live="loading bar"></div>
 		</div>`;
 }
 
@@ -96,7 +96,7 @@ export function Spinner()
 		<div class="fullscreen overlay">
 			<div class="spinner-container">
 				<div class="spinner-wrapper">
-					<div class="spinner"></div>
+					<div class="spinner" aria-label="Loading spinning" aria-live="loading spinner"></div>
 				</div>
 			</div>
 		</div>`;

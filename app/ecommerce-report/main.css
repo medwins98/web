@@ -145,12 +145,12 @@
 	color: #6b7280;
 	margin-top: 4px;
 }
-oi-subtotal .item-discount {
+.oi-subtotal .item-discount {
 	font-size: 11px;
 	color: #ef4444;
 	text-decoration: line-through;
 }
-oi-footer {
+.oi-footer {
 	background: #fefce8;
 	padding: 10px 16px;
 	border-top: 1px solid #fef08a;
@@ -160,7 +160,6 @@ oi-footer {
 	align-items: center;
 	gap: 8px;
 }
-
 
 /* ---- SKU Performance ---- */
 .sku-performance-header {

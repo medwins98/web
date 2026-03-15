@@ -67,7 +67,7 @@ function MainPage()
 	
 	const allData = useRef(null);
 	const [dataKey, setDataKey] = useState(null);
-
+	
 	const uploadBtnHandler = useCallback(() => setDataKey(null), []);
 	
 	const showDonate = useCallback(() => {
@@ -84,7 +84,7 @@ function MainPage()
 	}, [allData]);
 	
 	const handleSelect = useCallback((e) => setDataKey(e.target.value), []);
-
+	
 	const showDetails = useCallback((key) =>
 	{
 		const selectedData = allData.current.joined.find(d => d.orderId === key);
@@ -109,8 +109,8 @@ function MainPage()
 				<option value="adjustment">Adjustment</option>
 				<option value="discrepancy">Discrepancy</option>
 			<//>
-			<${ButtonIcon} onClick=${uploadBtnHandler} icon="upload" className="btn btn-secondary" title="Upload"><//>
-			<${ButtonIcon} onClick=${showDonate} icon="donate" className="btn btn-secondary" title="Donate"><//>
+			<${ButtonIcon} onClick=${uploadBtnHandler} icon="upload" className="btn btn-secondary" title="New upload" aria-label="New upload"><//>
+			<${ButtonIcon} onClick=${showDonate} icon="donate" className="btn btn-secondary" title="Support Me" aria-label="Support Me"><//>
 		</div>
 		${(dataKey !== 'report')
 			? html`
@@ -132,13 +132,21 @@ function MainPage()
 							<div class="title">Discrepancy</div>
 							<div class="result default">${allData.current.discrepancyCount}</div>
 						</div>
+						<div class="card grid-item-card">
+							<div class="title">Total Adjustment</div>
+							<div class="result default">${formatValue(allData.current.adjustmentTotal, 'currency')}</div>
+						</div>
+						<div class="card grid-item-card">
+							<div class="title">Total Discrepancy</div>
+							<div class="result default">${formatValue(allData.current.discrepancyTotal, 'currency')}</div>
+						</div>
 					</div>
 				</div>
 				<${TableWrapper} key=${dataKey} data=${allData.current[dataKey]} columnMap=${MAP_KEY[dataKey]} actionHandler=${actionHandler} />`
 			: html`<${MainDashboard} key="report" data=${allData.current.report} />`
 		}`
 }
-
+//**/
 function FormUploadReport({ dataHandler = null })
 {
 	const { setSpinner, setLoading } = useUIDispatcher();
@@ -202,6 +210,14 @@ function FormUploadReport({ dataHandler = null })
 			base.returnCount = base.joined.filter(d => d.hasReturn === 'Y')?.length || 0;
 			base.adjustmentCount = base.joined.filter(d => d.hasAdjustment === 'Y')?.length || 0;
 			base.discrepancyCount = base.joined.filter(d => d.hasDiscrepancy === 'Y')?.length || 0;
+			base.adjustmentTotal = base.adjustment?.reduce((acc, curr) => {
+				return acc += curr.adjustedCost;
+			}, 0);
+			base.discrepancyTotal = base.transaction
+				.filter(d => d.shippingFeeReleasedToCarrier < 0)
+				.reduce((acc, curr) => {
+				return acc += (curr.shippingFeePaidByBuyer + curr.shippingDiscountByCarrier + curr.shopeeFreeShippingSubsidy + curr.shippingFeeReleasedToCarrier);
+			}, 0);
 			base.slug = Object.values(base.slug[1])[1];
 			loggingUsage(base.slug, base.orderRelationCount);
 			dataHandler(base);

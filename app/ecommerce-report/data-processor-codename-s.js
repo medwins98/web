@@ -904,10 +904,7 @@ export function mapData(raw, type, relationData = null)
 			temp.serviceFeeDetail = serviceFeeRelation;
 			temp.adjustmentDetail = adjustmentRelation;
 			temp.discrepancyDetail = discrepancyRelation;
-			const isDiscrepancy = (parseInt(temp.shippingFeePaidByBuyer) + parseInt(temp.shippingDiscountByCarrier) + parseInt(temp.shopeeFreeShippingSubsidy)) + parseInt(temp.shippingFeeReleasedToCarrier);
-			if(isDiscrepancy) {
-				//console.log(isDiscrepancy, temp.hasDiscrepancy);
-			}
+			temp.discrepancyTotal = (temp.shippingFeePaidByBuyer + temp.shippingDiscountByCarrier + temp.shopeeFreeShippingSubsidy + temp.shippingFeeReleasedToCarrier);
 		}
 		
 		return temp;
@@ -976,7 +973,6 @@ export function joinData(orderData, transactionDetail)
 	
 	orderMap = Array.from(orderMap.values());
 	
-	const checkData = (arr) => (arr.length === 0) ? null : arr;
 	transactionDetail.forEach(item => {
 		item.orderRelation = orderMap.find(d => d.orderId === item.orderId) || null;
 	});
@@ -1006,9 +1002,9 @@ export function generateReport(data)
 	};
 	
 	const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+	const shippedStatusValues = ['sedang dikirim', 'telah dikirim', 'pesanan diterima'];
 	
 	// Count Total Order by Statu
-	const shippedStatusValues = ['sedang dikirim', 'telah dikirim', 'pesanan diterima'];
 	const totalCompleteOrder = data.filter(order => order.status.toLowerCase().includes('selesai')).length;
 	const totalShippedOrder = data.filter(order => shippedStatusValues.includes(order.status.toLowerCase())).length;
 	const totalSuccessOrder = totalCompleteOrder + totalShippedOrder;
